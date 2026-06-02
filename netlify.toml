@@ -1,0 +1,19 @@
+# Netlify configuration for the DreamForce career quiz site.
+#
+# - The site is a single static HTML file (`dreamforce.html`) plus one
+#   serverless function (`send-results`) that emails users a link to
+#   their personalized results.
+# - No build step is required.
+
+[build]
+  publish        = "."
+  functions      = "netlify/functions"
+
+# Optional: serve dreamforce.html at the root so the email-link URLs
+# look like https://your-site.netlify.app/#r=… instead of
+# https://your-site.netlify.app/dreamforce.html#r=… . Comment out if
+# you'd rather keep the explicit path.
+[[redirects]]
+  from   = "/"
+  to     = "/dreamforce.html"
+  status = 200
