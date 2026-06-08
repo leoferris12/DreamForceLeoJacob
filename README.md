@@ -61,6 +61,8 @@ build settings come from `netlify.toml`, so leave them blank.
 
 ### 3. Set environment variables
 
+If the email step says “Email service is not configured”, the Netlify function is not seeing the Resend credentials.
+
 In Netlify: **Site settings → Environment variables**, add:
 
 | Key              | Value                                                            |
@@ -71,6 +73,16 @@ In Netlify: **Site settings → Environment variables**, add:
 
 Then **Deploys → Trigger deploy → Clear cache and deploy site** so the
 function picks up the new vars.
+
+If you are testing locally with `netlify dev`, create a `.env` file in
+this project with the same two keys:
+
+```env
+RESEND_API_KEY=re_xxx
+FROM_EMAIL="Flightway <quiz@yourdomain.com>"
+```
+
+After saving the file, run `netlify dev` again.
 
 ### 4. Test it
 

@@ -17,6 +17,12 @@
 
 const RESEND_ENDPOINT = 'https://api.resend.com/emails';
 
+// Single place to inject your Resend settings.
+// Set RESEND_API_KEY and FROM_EMAIL in Netlify Site settings → Environment variables
+// or in a local .env file when running `netlify dev`.
+const RESEND_API_KEY = process.env.RESEND_API_KEY || '';
+const FROM_EMAIL = process.env.FROM_EMAIL || 'Flightway <onboarding@resend.dev>';
+
 // Minimal email validator — same shape as the client check.
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
@@ -130,11 +136,18 @@ exports.handler = async (event) => {
     return json(400, { error: 'Invalid results URL.' }, origin);
   }
 
-  const apiKey = process.env.RESEND_API_KEY;
-  const fromEmail = process.env.FROM_EMAIL || 'Flightway <onboarding@resend.dev>';
+  const apiKey = RESEND_API_KEY;
+  const fromEmail = FROM_EMAIL;
   if (!apiKey) {
     console.error('RESEND_API_KEY is not configured');
-    return json(500, { error: 'Email service is not configured.' }, origin);
+    return json(
+      500,
+      {
+        error:
+          'Email service is not configured. Add RESEND_API_KEY in Netlify Site settings → Environment variables (or your local .env file) and redeploy or restart netlify dev.',
+      },
+      origin,
+    );
   }
 
   try {
