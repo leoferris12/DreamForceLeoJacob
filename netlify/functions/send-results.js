@@ -7,7 +7,7 @@
 // environment variables in Netlify (Site settings → Environment variables):
 //
 //   RESEND_API_KEY    your Resend API key (starts with "re_…")
-//   FROM_EMAIL        the verified sender, e.g. "DreamForce <quiz@yourdomain.com>"
+//   FROM_EMAIL        the verified sender, e.g. "Flightway <quiz@yourdomain.com>"
 //                     (during dev you can use "onboarding@resend.dev")
 //   ALLOWED_ORIGIN    (optional) your site origin for CORS, e.g.
 //                     "https://your-site.netlify.app". Defaults to "*".
@@ -56,10 +56,10 @@ function buildHtml(resultsUrl) {
       <tr><td align="center">
         <table role="presentation" width="560" cellpadding="0" cellspacing="0" style="max-width:560px;background:#ffffff;border-radius:16px;box-shadow:0 6px 24px rgba(15,23,42,0.06);overflow:hidden;">
           <tr><td style="padding:36px 40px 0;text-align:center;">
-            <div style="font-size:12px;letter-spacing:3px;font-weight:700;color:#1a56db;text-transform:uppercase;margin-bottom:10px;">DreamForce Career Compass</div>
+            <div style="font-size:12px;letter-spacing:3px;font-weight:700;color:#1a56db;text-transform:uppercase;margin-bottom:10px;">Flightway Flightway</div>
             <h1 style="font-family:Georgia,'Times New Roman',serif;font-size:30px;font-weight:700;color:#0f172a;margin:0 0 14px;line-height:1.2;">Your results from your career quiz are ready</h1>
             <p style="font-size:15px;line-height:1.65;color:#475569;margin:0 0 28px;">
-              Thanks for completing the Career Compass quiz. We scored your answers
+              Thanks for completing the Flightway quiz. We scored your answers
               across 12 industries and built a personalized breakdown — top matches,
               recommended majors, classes to try, and salary outlook.
             </p>
@@ -78,7 +78,7 @@ function buildHtml(resultsUrl) {
           </td></tr>
           <tr><td style="background:#f8fafc;padding:20px 40px;text-align:center;">
             <p style="font-size:11px;color:#94a3b8;margin:0;">
-              You're receiving this because you requested your results at DreamForce.
+              You're receiving this because you requested your results at Flightway.
               If this wasn't you, you can safely ignore this email.
             </p>
           </td></tr>
@@ -93,7 +93,7 @@ function buildText(resultsUrl) {
   return [
     'Your results from your career quiz are ready.',
     '',
-    'Thanks for completing the DreamForce Career Compass quiz. Click the link',
+    'Thanks for completing the Flightway Flightway quiz. Click the link',
     'below to view your personalized results:',
     '',
     resultsUrl,
@@ -131,7 +131,7 @@ exports.handler = async (event) => {
   }
 
   const apiKey = process.env.RESEND_API_KEY;
-  const fromEmail = process.env.FROM_EMAIL || 'DreamForce <onboarding@resend.dev>';
+  const fromEmail = process.env.FROM_EMAIL || 'Flightway <onboarding@resend.dev>';
   if (!apiKey) {
     console.error('RESEND_API_KEY is not configured');
     return json(500, { error: 'Email service is not configured.' }, origin);

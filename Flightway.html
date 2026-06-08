@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FlyWay — Career Accelerator</title>
+<title>Flightway — Career Accelerator</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
 <style>
@@ -337,6 +337,21 @@
   .cta-btn:hover::after { transform: translateX(120%); }
   .nav-cta::after { content: ''; position: absolute; inset: 0; background: linear-gradient(105deg, transparent 30%, rgba(255,255,255,0.2) 50%, transparent 70%); transform: translateX(-120%); transition: transform 0.55s ease; }
   .nav-cta:hover::after { transform: translateX(120%); }
+
+  /* Purple glowing quiz CTA buttons */
+  @keyframes quiz-glow-pulse { 0%, 100% { box-shadow: 0 0 18px rgba(139,92,246,0.65), 0 0 38px rgba(139,92,246,0.3), 0 8px 24px rgba(109,40,217,0.45); } 50% { box-shadow: 0 0 28px rgba(167,139,250,0.85), 0 0 56px rgba(139,92,246,0.5), 0 10px 32px rgba(109,40,217,0.6); } }
+  @keyframes quiz-shimmer { 0% { left: -70%; } 100% { left: 130%; } }
+  @keyframes quiz-sparkle { 0%, 100% { opacity: 0; transform: scale(0.5) rotate(0deg); } 50% { opacity: 1; transform: scale(1) rotate(180deg); } }
+  .quiz-cta {
+    background: linear-gradient(135deg, #6d28d9 0%, #7c3aed 40%, #a855f7 70%, #8b5cf6 100%) !important;
+    box-shadow: 0 0 18px rgba(139,92,246,0.65), 0 0 38px rgba(139,92,246,0.3), 0 8px 24px rgba(109,40,217,0.45) !important;
+    animation: quiz-glow-pulse 2.4s ease-in-out infinite !important;
+    border-color: transparent !important;
+    color: #fff !important;
+  }
+  .quiz-cta::before { content: ''; position: absolute; top: -50%; left: -70%; width: 45%; height: 200%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent); transform: skewX(-18deg); animation: quiz-shimmer 2.2s ease-in-out infinite; pointer-events: none; }
+  .quiz-cta:hover { background: linear-gradient(135deg, #5b21b6 0%, #6d28d9 40%, #9333ea 70%, #7c3aed 100%) !important; transform: translateY(-3px) !important; }
+  .quiz-cta::after { background: none !important; }
 
   /* Gentle float on quiz preview */
   @keyframes gentle-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
@@ -949,9 +964,10 @@
     <div class="nav-links">
       <a onclick="showPage('home')">Home</a>
       <a onclick="showPage('students')">For Students</a>
+
       <a onclick="showPage('educators')">For Career Centers</a>
       <a onclick="showPage('coaching')">Coaching</a>
-      <a class="nav-cta" onclick="showPage('quiz')">Take the Quiz</a>
+      <a class="nav-cta quiz-cta" onclick="showPage('quiz')">Take the Quiz</a>
     </div>
   </div>
 </nav>
@@ -964,7 +980,7 @@
     <div class="hero-badge"><span class="dot"></span>Free &middot; 6 minutes &middot; 19 interactive questions</div>
     <h1 class="gradient-text">Find the career<br>you were made for.</h1>
     <p>Our AI-powered quiz analyzes your personality, skills, and ambitions &mdash; then matches you to industries and recommends specific majors and classes tailored to your school.</p>
-    <a class="cta-btn" onclick="showPage('quiz')" style="font-size:1.05rem;padding:20px 56px;margin-bottom:28px;box-shadow:0 14px 40px rgba(0,0,0,0.15);">Take the Quiz &mdash; Free &rarr;</a>
+    <a class="cta-btn quiz-cta" onclick="showPage('quiz')" style="font-size:1.05rem;padding:20px 56px;margin-bottom:28px;">Take the Quiz &mdash; Free &rarr;</a>
     <div style="display:flex;gap:28px;font-size:0.85rem;color:var(--text-tertiary);justify-content:center;flex-wrap:wrap;margin-top:8px;">
       <span style="display:inline-flex;align-items:center;gap:5px"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> 14 interactive input types</span>
       <span style="display:inline-flex;align-items:center;gap:5px"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/></svg> 12 industries matched</span>
@@ -994,7 +1010,7 @@
             </div>
           </div>
           <div style="margin-top: 32px;">
-            <a class="cta-btn" onclick="showPage('quiz')">Start the Quiz &rarr;</a>
+            <a class="cta-btn quiz-cta" onclick="showPage('quiz')">Start the Quiz &rarr;</a>
           </div>
         </div>
         <div class="quiz-preview fade-in" onclick="showPage('quiz')" style="cursor:pointer;transition:all 0.3s">
@@ -1075,7 +1091,7 @@
     <div class="section-inner">
       <h2 class="section-title fade-in" style="text-align:center;margin:0 auto 20px">Ready to find your career?</h2>
       <p class="section-desc fade-in" style="text-align:center;margin:0 auto 48px">No fluff. No filler. Just 6 minutes of clarity.</p>
-      <div class="fade-in"><a class="cta-btn" onclick="showPage('quiz')" style="font-size:1rem;padding:18px 52px">Take the Quiz &mdash; Free &rarr;</a></div>
+      <div class="fade-in"><a class="cta-btn quiz-cta" onclick="showPage('quiz')" style="font-size:1rem;padding:18px 52px">Take the Quiz &mdash; Free &rarr;</a></div>
     </div>
   </section>
 </div>
@@ -1085,7 +1101,7 @@
     <button class="back-btn" onclick="showPage('home')">&larr; Back</button>
     <h1 style="font-size: clamp(2.4rem, 5vw, 3.5rem);">Find the career you were made for.</h1>
     <p>Stop guessing. Our AI-powered quiz, in-depth career guides, and 1-on-1 coaching with industry experts help you move forward with clarity and confidence.</p>
-    <a class="cta-btn" onclick="showPage('quiz')">Take the Career Quiz</a>
+    <a class="cta-btn quiz-cta" onclick="showPage('quiz')">Take the Career Quiz</a>
   </section>
   <section class="quiz-section">
     <div class="section-inner">
@@ -1147,7 +1163,7 @@
       <h2 class="section-title fade-in">They found their path</h2>
       <div class="testimonial-grid fade-in">
         <div class="testimonial-card"><blockquote>"I was torn between three paths. The quiz narrowed it down, and my coach helped me commit. I start at Deloitte this fall."</blockquote><div class="testimonial-author"><div class="testimonial-avatar">JL</div><div><div class="testimonial-name">Jamie L.</div><div class="testimonial-role">UC Berkeley, Class of '25</div></div></div></div>
-        <div class="testimonial-card"><blockquote>"The career guides are incredibly detailed. I didn't even know product management existed until DreamForce."</blockquote><div class="testimonial-author"><div class="testimonial-avatar">PR</div><div><div class="testimonial-name">Priya R.</div><div class="testimonial-role">NYU Stern, Class of '26</div></div></div></div>
+        <div class="testimonial-card"><blockquote>"The career guides are incredibly detailed. I didn't even know product management existed until Flightway."</blockquote><div class="testimonial-author"><div class="testimonial-avatar">PR</div><div><div class="testimonial-name">Priya R.</div><div class="testimonial-role">NYU Stern, Class of '26</div></div></div></div>
       </div>
     </div>
   </section>
@@ -1155,7 +1171,7 @@
     <div class="section-inner">
       <h2 class="section-title fade-in" style="text-align:center;">Ready to find your career?</h2>
       <p class="section-desc fade-in" style="text-align:center;">It starts with a 10-minute quiz. No fluff &mdash; just clarity.</p>
-      <div class="fade-in"><a class="cta-btn" onclick="showPage('quiz')">Take the Quiz &mdash; Free</a><a class="cta-btn cta-btn-outline" href="#">Browse Career Guides</a></div>
+      <div class="fade-in"><a class="cta-btn quiz-cta" onclick="showPage('quiz')">Take the Quiz &mdash; Free</a><a class="cta-btn cta-btn-outline" href="#">Browse Career Guides</a></div>
     </div>
   </section>
 </div>
@@ -1164,7 +1180,7 @@
   <section class="hero" style="min-height: auto; padding-top: 140px; padding-bottom: 80px;">
     <button class="back-btn" onclick="showPage('home')">&larr; Back</button>
     <h1 style="font-size: clamp(2.4rem, 5vw, 3.5rem);">Give every student a career advisor.</h1>
-    <p>DreamForce's AI-powered platform scales your career center's impact.</p>
+    <p>Flightway's AI-powered platform scales your career center's impact.</p>
     <a class="cta-btn" href="#">Request a Demo</a>
   </section>
   <section>
@@ -1200,7 +1216,7 @@
   </section>
   <section class="cta-section">
     <div class="section-inner">
-      <h2 class="section-title fade-in" style="text-align:center;">Bring DreamForce to your campus</h2>
+      <h2 class="section-title fade-in" style="text-align:center;">Bring Flightway to your campus</h2>
       <div class="fade-in"><a class="cta-btn" href="#">Request a Demo</a></div>
     </div>
   </section>
@@ -1234,7 +1250,7 @@
 
     <div id="qz-intro">
       <div class="qz-intro-card">
-        <div class="qz-badge">Career Compass</div>
+        <div class="qz-badge">Flightway</div>
         <h1 class="qz-intro-title">Find the Career<br>You Were Built For</h1>
         <p class="qz-intro-desc">18 interactive questions — sliders, sorts, swipes, dials, and more. We'll match you to industries and recommend specific majors and classes at your school.</p>
         <div class="qz-intro-meta">
@@ -1247,7 +1263,7 @@
     </div>
 
     <div id="qz-quiz" class="qz-hidden">
-      <div class="qz-hdr"><div class="qz-logo-line">Career Compass</div></div>
+      <div class="qz-hdr"><div class="qz-logo-line">Flightway</div></div>
       <div id="qz-encouragement" class="qz-encouragement"></div>
       <div class="qz-prog-wrap">
         <div class="qz-prog-meta">
@@ -1331,7 +1347,7 @@
   <div class="footer-inner">
     <div class="footer-left">
       <a class="logo" onclick="showPage('home')">Dream<span>Force</span></a>
-      <p>&copy; 2026 DreamForce. All rights reserved.</p>
+      <p>&copy; 2026 Flightway. All rights reserved.</p>
     </div>
     <div class="footer-links"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Contact</a><a href="#">Blog</a></div>
   </div>
@@ -1784,7 +1800,7 @@ const QZ_IND = {
   marketing:   { name:'Marketing & Communications',  icon:'📣' }
 };
 
-// Map quiz industries → DreamForce career deep-dive keys
+// Map quiz industries → Flightway career deep-dive keys
 const QZ_TO_CAREER = {
   tech: ['software-engineering','data-science','ux-design'],
   healthcare: ['healthcare-admin'],
@@ -3257,7 +3273,7 @@ function qzRestart(){
      2. "Email me" → qzOpenEmailModal() shows the email-prompt modal.
      3. Submit → POST to /.netlify/functions/send-results with { email, token, results_url }.
      4. The Netlify function emails the user a link of the form:
-            https://<your-site>/dreamforce.html#r=<token>
+            https://<your-site>/flightway.html#r=<token>
      5. On page load, qzBootFromHash() detects #r=… and restores state + jumps
         straight to qzShowResults().
    The token is the entire quiz state, base64url-encoded — so results survive

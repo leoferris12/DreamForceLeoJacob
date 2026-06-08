@@ -1,6 +1,6 @@
-# DreamForce — Career Compass
+# Flightway — Career Compass
 
-A single-file career-fit quiz (`dreamforce.html`) with a tiny Netlify
+A single-file career-fit quiz (`flightway.html`) with a tiny Netlify
 serverless function that emails users a link to their personalized results.
 
 ## How the email flow works
@@ -13,13 +13,13 @@ serverless function that emails users a link to their personalized results.
      school, resume boosts) to JSON,
    - base64url-encodes it into a compact token,
    - builds a results URL of the form
-     `https://your-site.netlify.app/dreamforce.html#r=<token>`, and
+     `https://your-site.netlify.app/flightway.html#r=<token>`, and
    - `POST`s `{ email, results_url, token }` to
      `/.netlify/functions/send-results`.
 4. The Netlify function (`netlify/functions/send-results.js`) calls the
    [Resend](https://resend.com) email API to send the user an email
    containing a **View My Results →** button linking to that URL.
-5. When the user clicks the button, `dreamforce.html` loads with `#r=…`
+5. When the user clicks the button, `flightway.html` loads with `#r=…`
    in the URL hash. The page detects this on load, decodes the state,
    and jumps straight to the results screen — no quiz to retake, no
    database lookup.
@@ -30,7 +30,7 @@ store anything. The only job of the function is to send the email.
 ## Files
 
 ```
-dreamforce.html                   # the whole site (intro, quiz, gate, results)
+flightway.html                   # the whole site (intro, quiz, gate, results)
 netlify.toml                      # publish dir + functions dir
 netlify/functions/send-results.js # serverless email sender
 ```
@@ -49,7 +49,7 @@ netlify/functions/send-results.js # serverless email sender
 ### 2. Push to Git and connect to Netlify
 
 ```bash
-cd DreamForce
+cd Flightway
 git init && git add . && git commit -m "Initial commit"
 # create a repo on GitHub/GitLab, then:
 git remote add origin <your-repo-url>
@@ -66,7 +66,7 @@ In Netlify: **Site settings → Environment variables**, add:
 | Key              | Value                                                            |
 |------------------|------------------------------------------------------------------|
 | `RESEND_API_KEY` | The key from step 1 (starts with `re_…`)                         |
-| `FROM_EMAIL`     | `DreamForce <quiz@yourdomain.com>` (or `onboarding@resend.dev`)  |
+| `FROM_EMAIL`     | `Flightway <quiz@yourdomain.com>` (or `onboarding@resend.dev`)  |
 | `ALLOWED_ORIGIN` | (optional) `https://your-site.netlify.app` — defaults to `*`     |
 
 Then **Deploys → Trigger deploy → Clear cache and deploy site** so the
@@ -74,7 +74,7 @@ function picks up the new vars.
 
 ### 4. Test it
 
-1. Open `https://your-site.netlify.app/dreamforce.html`.
+1. Open `https://your-site.netlify.app/flightway.html`.
 2. Finish the quiz, click **Email me my results**, enter your email.
 3. You should receive an email within a few seconds with a **View My
    Results →** button. Click it and the results page should render
@@ -84,11 +84,11 @@ function picks up the new vars.
 
 ```bash
 npm install -g netlify-cli
-cd DreamForce
+cd Flightway
 netlify dev
 ```
 
-`netlify dev` serves `dreamforce.html` at <http://localhost:8888> and
+`netlify dev` serves `flightway.html` at <http://localhost:8888> and
 proxies `/.netlify/functions/send-results` to the local function.
 Create a `.env` file (or use `netlify env:set`) with `RESEND_API_KEY`
 and `FROM_EMAIL` so the local function can actually send mail.
